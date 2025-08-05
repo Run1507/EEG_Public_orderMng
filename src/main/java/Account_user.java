@@ -156,6 +156,6 @@ Thread.sleep(4000);
         Thread.sleep(8000);
         //driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         driver.findElement(By.xpath("//*[@class='ant-btn css-cdzvx5 ant-btn-primary ant-btn-color-primary ant-btn-variant-solid col-auto ms-auto']")).click();
-        System.out.println("Request submitted successfully.");
+        //System.out.println("Request submitted successfully.");
     }
 }
