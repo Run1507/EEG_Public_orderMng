@@ -101,6 +101,7 @@ public class Main {
         action.sendKeys(Keys.ENTER).perform();
         Thread.sleep(3000);
 
+        //Dosage Medication dropdown
         driver.findElement(By.xpath("//body[1]/div[1]/div[1]/div[1]/div[1]/div[2]/form[1]/div[1]/div[6]/div[1]/div[2]/div[2]/div[1]")).click();
         Actions action1=new Actions(driver);
         action1.sendKeys(Keys.ENTER).perform();
