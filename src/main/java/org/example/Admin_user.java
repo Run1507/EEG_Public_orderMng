@@ -39,8 +39,8 @@ public class Admin_user {
         driver.findElement(By.xpath("//span[text()='Add']")).click();
 
         //Profile
-        driver.findElement(By.id("firstName")).sendKeys("Wick");
-        driver.findElement(By.id("lastName")).sendKeys("Reed");
+        driver.findElement(By.id("firstName")).sendKeys("Wegueon");
+        driver.findElement(By.id("lastName")).sendKeys("Muh");
         Thread.sleep(1000);
 
         driver.findElement(By.xpath("//input[@id='gender']")).click();
@@ -54,7 +54,7 @@ public class Admin_user {
         date.sendKeys("05-16-2000" + Keys.ENTER);
 
         driver.findElement(By.id("contactPhone")).sendKeys("9597224187");
-        driver.findElement(By.id("email")).sendKeys("subash1@gmail.com");
+        driver.findElement(By.id("email")).sendKeys("arunpandian.a@kosoft.co");
 
         driver.findElement(By.xpath("//input[@id='handedness']")).click();
         driver.findElement(By.xpath("//*[text()='Right Hand']")).click();
@@ -77,15 +77,15 @@ public class Admin_user {
         robot5.keyPress(KeyEvent.VK_ENTER);
         robot5.keyRelease(KeyEvent.VK_ENTER);
 
-        driver.findElement(By.id("diagnosis")).sendKeys("hyper");
-        driver.findElement(By.id("symptoms")).sendKeys("Fainting");
+        driver.findElement(By.id("diagnosis")).sendKeys("ADHD");
+        driver.findElement(By.id("symptoms")).sendKeys("Confusion");
 
         driver.findElement(By.id("medicationResponse")).sendKeys("Yes");
 
         driver.findElement(By.xpath("//input[@type='radio' and @value='False']")).click();
 
         driver.findElement(By.xpath("/html/body/div[1]/div/div/div/div/div/main/div/div/div[1]/div/div/div[2]/form/div[7]/div[3]/div[1]/div/div[2]/div/div/div/label[2]/span[1]")).click();
-        driver.findElement(By.id("briefHistory")).sendKeys("Automation testing");
+        driver.findElement(By.id("briefHistory")).sendKeys("Automation testing : Admin side created request");
 
 //        Thread.sleep(1000);
 //      JavascriptExecutor j = (JavascriptExecutor) driver;
@@ -160,8 +160,8 @@ public class Admin_user {
         driver.findElement(By.xpath("//button[@type='submit']")).click();
 
         //Thread.sleep(10000);
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
-      wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//button[@type='button']")));
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+      wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@class='ant-btn css-cdzvx5 ant-btn-primary ant-btn-color-primary ant-btn-variant-solid col-auto ms-auto']")));
 //    driver.findElement(By.xpath("//button[@type='button']")).click();
     //driver.close();
 

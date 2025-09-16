@@ -24,8 +24,10 @@ public class Account_user {
 
         driver.get("https://staging.eegdatahub.com/");
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-
-        driver.findElement(By.id("username")).sendKeys("krishnarajan.n@kosoft.co");
+//Invoice account
+        driver.findElement(By.id("username")).sendKeys("deviga.v@kosoft.co");
+//None billing account
+        //driver.findElement(By.id("username")).sendKeys("kothainayagi.a@kosoft.co");
         driver.findElement(By.id("password")).sendKeys("Arun@1507");
         driver.findElement(By.xpath("//button[@type='submit']")).click();
 
@@ -33,10 +35,10 @@ public class Account_user {
         Thread.sleep(3000);
 
         driver.findElement(By.xpath("/html/body/div[1]/div/div/div/div/div/main/div/div/div[1]/div/button[2]/span")).click();
-        driver.findElement(By.id("firstName")).sendKeys("siva");
+        driver.findElement(By.id("firstName")).sendKeys("Gali");
 
 
-        driver.findElement(By.id("lastName")).sendKeys("sanjai dev");
+        driver.findElement(By.id("lastName")).sendKeys("vascion");
 
         driver.findElement(By.xpath("//input[@id='gender']")).click();
         driver.findElement(By.xpath("//div[@title='Male']")).click();
@@ -77,7 +79,7 @@ Thread.sleep(4000);
 
         driver.findElement(By.xpath("//input[@type='radio' and @value='False']")).click();
         driver.findElement(By.xpath("/html/body/div[1]/div/div/div/div/div/main/div/div/div[1]/div/div/div[2]/form/div[7]/div[3]/div[1]/div/div[2]/div/div/div/label[2]/span[1]")).click();
-        driver.findElement(By.id("briefHistory")).sendKeys("Automation testing");
+        driver.findElement(By.id("briefHistory")).sendKeys("Automation testing: order management via created request");
 
         JavascriptExecutor req = (JavascriptExecutor) driver;
         req.executeScript("window.scrollBy(0,500)");
@@ -155,7 +157,8 @@ Thread.sleep(4000);
 
         Thread.sleep(8000);
         //driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+
         driver.findElement(By.xpath("//*[@class='ant-btn css-cdzvx5 ant-btn-primary ant-btn-color-primary ant-btn-variant-solid col-auto ms-auto']")).click();
-        //System.out.println("Request submitted successfully.");
+        System.out.println("Request submitted successfully.");
     }
 }

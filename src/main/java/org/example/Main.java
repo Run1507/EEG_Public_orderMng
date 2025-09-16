@@ -31,15 +31,17 @@ public class Main {
         WebDriver driver = new ChromeDriver(chrome);
         driver.manage().timeouts().implicitlyWait(15,TimeUnit.SECONDS);
 
-        // Open EEG DataHub form
-        driver.get("https://staging.eegdatahub.com/patient-form/f3c331b5-c216-4a11-8ada-6fe7665cb1e1");
+        // Open EEG DataHub form : Nanobot-Billing
+        driver.get("https://staging.eegdatahub.com/patient-form/e5f5a5e5-2ccf-4973-a47b-615609741170");
+        //None billing acc : Kothai
+        //driver.get("https://staging.eegdatahub.com/patient-form/0910739e-b8ad-4d44-a7be-12f7607f2bed");
 
         // Fill out the form
        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("first_Name")));
 
-        driver.findElement(By.id("first_Name")).sendKeys("Marcus ");
-        driver.findElement(By.id("last_Name")).sendKeys("victor");
+        driver.findElement(By.id("first_Name")).sendKeys("Gilly");
+        driver.findElement(By.id("last_Name")).sendKeys("Hampston");
 
         WebElement date = driver.findElement(By.xpath("//input[@placeholder='Select date']"));
         date.click();
@@ -86,12 +88,15 @@ public class Main {
         driver.findElement(By.xpath("/html/body/div[1]/div/div/div/div[2]/form/div[1]/div[4]/table/tbody/tr[6]/td[2]/label/span/input")).click();
         driver.findElement(By.xpath("/html/body/div[1]/div/div/div/div[2]/form/div[1]/div[4]/table/tbody/tr[7]/td[2]/label/span/input")).click();
         driver.findElement(By.xpath("/html/body/div[1]/div/div/div/div[2]/form/div[1]/div[4]/table/tbody/tr[8]/td[2]/label/span/input")).click();
-
+         // first the click the dropdown
         WebElement drop=driver.findElement(By.xpath("//*[@id=\"root\"]/div/div/div/div[2]/form/div[1]/div[6]/div/div[2]/div[1]/div"));
         drop.click();
+        //second one is search dropdown related xpath and search the data to send the data
         driver.findElement(By.xpath("(//input[@type='search'])[6]")).sendKeys("JANUMET (Oral Pill)");
+
         Thread.sleep(4000);
 
+        // last step enter option
         Actions action=new Actions(driver);
         action.sendKeys(Keys.ENTER).perform();
         Thread.sleep(3000);
