@@ -1,6 +1,7 @@
 package org.example;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
+import org.apache.poi.ss.formula.functions.T;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -39,12 +40,13 @@ public class Admin_user {
         driver.findElement(By.xpath("//span[text()='Add']")).click();
 
         //Profile
-        driver.findElement(By.id("firstName")).sendKeys("Wegueon");
-        driver.findElement(By.id("lastName")).sendKeys("Muh");
+        driver.findElement(By.id("firstName")).sendKeys("Hales");
+        driver.findElement(By.id("lastName")).sendKeys("A");
         Thread.sleep(1000);
 
         driver.findElement(By.xpath("//input[@id='gender']")).click();
         driver.findElement(By.xpath("//div[@title='Male']")).click();
+        //driver.findElement(By.xpath("//div[@title='Female']")).click();
 
         driver.findElement(By.xpath("//input[@id='genderIdentity']")).click();
         driver.findElement(By.xpath("/html/body/div[4]/div/div/div[2]/div/div/div/div[1]")).click();
@@ -158,12 +160,28 @@ public class Admin_user {
         driver.findElement(By.xpath("//*[@id=\"root\"]/div/div/div/div/div/main/div/div/div[1]/div/div/div[2]/form/div[13]/label/span[1]/input")).click();
 
         driver.findElement(By.xpath("//button[@type='submit']")).click();
+        Thread.sleep(5000);
+
+WebElement button = driver.findElement(By.xpath("//button[@type='button']//span[contains (text(), 'Submit')]"));
+//Thread.sleep(3000);
+button.click();
+        System.out.println(button.getText());
+
+
+
 
         //Thread.sleep(10000);
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
-      wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@class='ant-btn css-cdzvx5 ant-btn-primary ant-btn-color-primary ant-btn-variant-solid col-auto ms-auto']")));
-//    driver.findElement(By.xpath("//button[@type='button']")).click();
+//        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
+//      wait.until(ExpectedConditions.visibilityOfElementLocated((By) button));
+//
+//   //driver.findElement(By.xpath("//button[@type='button']")).click();
+//        button.click();
+//        System.out.println(button.getText());
+
+       // Thread.sleep(10000);
+        //driver.findElement(By.tagName("button")).click();
     //driver.close();
+
 
 
 
