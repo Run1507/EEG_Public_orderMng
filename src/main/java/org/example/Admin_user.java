@@ -180,7 +180,7 @@ button.click();
 
        // Thread.sleep(10000);
         //driver.findElement(By.tagName("button")).click();
-    //driver.close();
+    driver.close();
 
 
 
