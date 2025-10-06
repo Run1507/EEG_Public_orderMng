@@ -40,7 +40,7 @@ public class Main {
        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("first_Name")));
 
-        driver.findElement(By.id("first_Name")).sendKeys("Gilly");
+        driver.findElement(By.id("first_Name")).sendKeys("Math");
         driver.findElement(By.id("last_Name")).sendKeys("Hampston");
 
         WebElement date = driver.findElement(By.xpath("//input[@placeholder='Select date']"));

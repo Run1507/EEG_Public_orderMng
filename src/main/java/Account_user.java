@@ -24,7 +24,7 @@ public class Account_user {
 
         driver.get("https://staging.eegdatahub.com/");
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-//Invoice account
+//Invoice account Nanobot
         driver.findElement(By.id("username")).sendKeys("deviga.v@kosoft.co");
 //None billing account
         //driver.findElement(By.id("username")).sendKeys("kothainayagi.a@kosoft.co");
@@ -35,10 +35,12 @@ public class Account_user {
         Thread.sleep(3000);
 
         driver.findElement(By.xpath("/html/body/div[1]/div/div/div/div/div/main/div/div/div[1]/div/button[2]/span")).click();
-        driver.findElement(By.id("firstName")).sendKeys("Gali");
+        driver.findElement(By.id("firstName")).sendKeys("Roshoan");
 
 
-        driver.findElement(By.id("lastName")).sendKeys("vascion");
+        driver.findElement(By.id("lastName")).sendKeys("shrieff");
+
+
 
         driver.findElement(By.xpath("//input[@id='gender']")).click();
         driver.findElement(By.xpath("//div[@title='Male']")).click();
@@ -114,7 +116,7 @@ Thread.sleep(4000);
         driver.findElement(By.xpath("/html/body/div[1]/div/div/div/div/div/main/div/div/div[1]/div/div/div[2]/form/div[11]/div[1]/div/div[2]/div/div/span/div[1]/span/div/p[3]")).click();
         Thread.sleep(1000);
         //StringSelection file1 = new StringSelection("D:\\work\\Automation Testing\\EDF file\\ECcondition.edf");
-        StringSelection file1 = new StringSelection("D:\\Work\\Automation\\quick_file_EC.edf");
+       StringSelection file1 = new StringSelection("D:\\Work\\Automation\\quick_file_EC.edf");
         Toolkit.getDefaultToolkit().getSystemClipboard().setContents(file1, null);
         Thread.sleep(500);
 
@@ -158,7 +160,8 @@ Thread.sleep(4000);
         Thread.sleep(8000);
         //driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 
-        driver.findElement(By.xpath("//*[@class='ant-btn css-cdzvx5 ant-btn-primary ant-btn-color-primary ant-btn-variant-solid col-auto ms-auto']")).click();
+        driver.findElement(By.xpath("/html/body/div[1]/div/div/div/div/div/main/div/div/div[1]/div/div/div[2]/div/div/div/div/div[4]/button/span")).click();
+
         System.out.println("Request submitted successfully.");
     }
 }
