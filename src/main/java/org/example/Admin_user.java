@@ -40,13 +40,13 @@ public class Admin_user {
         driver.findElement(By.xpath("//span[text()='Add']")).click();
 
         //Profile
-        driver.findElement(By.id("firstName")).sendKeys("Hales");
-        driver.findElement(By.id("lastName")).sendKeys("A");
+        driver.findElement(By.id("firstName")).sendKeys("kieng");
+        driver.findElement(By.id("lastName")).sendKeys("chi");
         Thread.sleep(1000);
 
         driver.findElement(By.xpath("//input[@id='gender']")).click();
-        driver.findElement(By.xpath("//div[@title='Male']")).click();
-        //driver.findElement(By.xpath("//div[@title='Female']")).click();
+        //driver.findElement(By.xpath("//div[@title='Male']")).click();
+        driver.findElement(By.xpath("//div[@title='Female']")).click();
 
         driver.findElement(By.xpath("//input[@id='genderIdentity']")).click();
         driver.findElement(By.xpath("/html/body/div[4]/div/div/div[2]/div/div/div/div[1]")).click();
@@ -55,16 +55,17 @@ public class Admin_user {
         date.click();
         date.sendKeys("05-16-2000" + Keys.ENTER);
 
-        driver.findElement(By.id("contactPhone")).sendKeys("9597224187");
+        driver.findElement(By.id("contactPhone")).sendKeys("9597241831");
         driver.findElement(By.id("email")).sendKeys("arunpandian.a@kosoft.co");
 
         driver.findElement(By.xpath("//input[@id='handedness']")).click();
         driver.findElement(By.xpath("//*[text()='Right Hand']")).click();
 
-        //Thread.sleep(1000);
+
 
         WebElement Accs=driver.findElement(By.id("account"));
-        Accs.sendKeys("Med Corp"+Keys.ENTER);
+       // Accs.sendKeys("Med Corp"+Keys.ENTER);
+        Accs.sendKeys("Nanobot"+Keys.ENTER);
 
         WebElement stateField = driver.findElement(By.id("state"));
         stateField.sendKeys("Washington" + Keys.ENTER);
@@ -160,39 +161,20 @@ public class Admin_user {
         driver.findElement(By.xpath("//*[@id=\"root\"]/div/div/div/div/div/main/div/div/div[1]/div/div/div[2]/form/div[13]/label/span[1]/input")).click();
 
         driver.findElement(By.xpath("//button[@type='submit']")).click();
-        Thread.sleep(5000);
-
-WebElement button = driver.findElement(By.xpath("//button[@type='button']//span[contains (text(), 'Submit')]"));
-//Thread.sleep(3000);
-button.click();
-        System.out.println(button.getText());
 
 
 
+        WebDriverWait wait4 = new WebDriverWait(driver, Duration.ofSeconds(15));
+        wait4.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//button[contains(@type, 'button')] //span [text()='Submit']")));
 
-        //Thread.sleep(10000);
-//        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
-//      wait.until(ExpectedConditions.visibilityOfElementLocated((By) button));
-//
-//   //driver.findElement(By.xpath("//button[@type='button']")).click();
-//        button.click();
-//        System.out.println(button.getText());
-
-       // Thread.sleep(10000);
-        //driver.findElement(By.tagName("button")).click();
-    driver.close();
+// ✅ Now safely interact with elements on the new page
+        Thread.sleep(4000);
+        driver.findElement(By.xpath("//button[contains(@type, 'button')] //span [text()='Submit']")).click();
 
 
 
 
 
-
-
-
-//        driver.findElement(By.xpath("//body[1]/div[1]/div[1]/div[1]/div[1]/div[2]/form[1]/div[1]/div[6]/div[1]/div[2]/div[2]/div[1]")).click();
-//        Actions action1 = new Actions(driver);
-//        action1.sendKeys(Keys.ENTER).perform();
-//        Thread.sleep(2000);
     }
 
 }

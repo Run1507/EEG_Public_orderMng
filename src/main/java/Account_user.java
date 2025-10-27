@@ -10,6 +10,7 @@ import java.awt.*;
 import java.awt.datatransfer.StringSelection;
 import java.awt.event.KeyEvent;
 import java.time.Duration;
+import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
 public class Account_user {
@@ -25,21 +26,32 @@ public class Account_user {
         driver.get("https://staging.eegdatahub.com/");
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 //Invoice account Nanobot
-        driver.findElement(By.id("username")).sendKeys("deviga.v@kosoft.co");
+        //driver.findElement(By.id("username")).sendKeys("deviga.v@kosoft.co");
 //None billing account
         //driver.findElement(By.id("username")).sendKeys("kothainayagi.a@kosoft.co");
-        driver.findElement(By.id("password")).sendKeys("Arun@1507");
+        driver.findElement(By.id("username")).sendKeys("krishnakumar.s@kosoft.co");
+
+        //driver.findElement(By.id("password")).sendKeys("Arun@1507");
+        driver.findElement(By.id("password")).sendKeys("Hope@1507");
+
         driver.findElement(By.xpath("//button[@type='submit']")).click();
 
         wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//span[text()='Order Management']"))).click();
         Thread.sleep(3000);
 
         driver.findElement(By.xpath("/html/body/div[1]/div/div/div/div/div/main/div/div/div[1]/div/button[2]/span")).click();
-        driver.findElement(By.id("firstName")).sendKeys("Roshoan");
+
+        //Thread.sleep(2000);
 
 
-        driver.findElement(By.id("lastName")).sendKeys("shrieff");
+        //String firstName = "TestFN" + UUID.randomUUID().toString().substring(0,5);
+        //String lastName = "TestLN" + UUID.randomUUID().toString().substring(0,5);
 
+        //driver.findElement(By.id("firstName")).sendKeys(firstName);
+        //driver.findElement(By.id("lastName")).sendKeys(lastName);
+
+        driver.findElement(By.id("firstName")).sendKeys("Farbie");
+        driver.findElement(By.id("lastName")).sendKeys("Nick");
 
 
         driver.findElement(By.xpath("//input[@id='gender']")).click();
@@ -73,7 +85,7 @@ public class Account_user {
         robot5.keyRelease(KeyEvent.VK_ENTER);
 
 
-Thread.sleep(4000);
+        Thread.sleep(4000);
         driver.findElement(By.id("diagnosis")).sendKeys("Arrhythmia");
         Thread.sleep(4000);
         driver.findElement(By.id("symptoms")).sendKeys("Confusion");
@@ -99,7 +111,7 @@ Thread.sleep(4000);
         driver.findElement(By.cssSelector("#rc_select_9")).sendKeys("JANUMET (Oral Pill)");
         Thread.sleep(3000);
 
- 
+
         //driver.findElement(By.xpath("((//input[@id='rc_select_9'])[1]")).sendKeys("JANUMET (Oral Pill)");
         Actions action = new Actions(driver);
         action.sendKeys(Keys.ENTER).perform();
@@ -116,7 +128,8 @@ Thread.sleep(4000);
         driver.findElement(By.xpath("/html/body/div[1]/div/div/div/div/div/main/div/div/div[1]/div/div/div[2]/form/div[11]/div[1]/div/div[2]/div/div/span/div[1]/span/div/p[3]")).click();
         Thread.sleep(1000);
         //StringSelection file1 = new StringSelection("D:\\work\\Automation Testing\\EDF file\\ECcondition.edf");
-       StringSelection file1 = new StringSelection("D:\\Work\\Automation\\quick_file_EC.edf");
+        StringSelection file1 = new StringSelection("D:\\EEG\\Feb_EDF files\\1\\EC47y_FEMALE_ZE-010-041-352_2024022122373582.edf");
+        //StringSelection file1 = new StringSelection("D:\\Work\\Automation\\quick_file_EC.edf");
         Toolkit.getDefaultToolkit().getSystemClipboard().setContents(file1, null);
         Thread.sleep(500);
 
@@ -134,7 +147,8 @@ Thread.sleep(4000);
         driver.findElement(By.xpath("/html/body/div[1]/div/div/div/div/div/main/div/div/div[1]/div/div/div[2]/form/div[11]/div[2]/div/div[2]/div/div/span/div[1]")).click();
         Thread.sleep(1000);
         //StringSelection file2 = new StringSelection("D:\\work\\Automation\\conditionEO.edf");
-        StringSelection file2 = new StringSelection("D:\\Work\\Automation\\quick_file_EO.edf");
+        StringSelection file2 = new StringSelection("D:\\EEG\\Feb_EDF files\\1\\EO47yrs.edf");
+        //StringSelection file2 = new StringSelection("D:\\Work\\Automation\\quick_file_EO.edf");
         Toolkit.getDefaultToolkit().getSystemClipboard().setContents(file2, null);
         Thread.sleep(500);
 
@@ -157,10 +171,12 @@ Thread.sleep(4000);
         driver.findElement(By.xpath("//button[@type='submit']")).click();
         System.out.println("Confirmation page loading.......");
 
-        Thread.sleep(8000);
-        //driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        WebDriverWait wait4 = new WebDriverWait(driver, Duration.ofSeconds(15));
+        wait4.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/html/body/div[1]/div/div/div/div/div/main/div/div/div[1]/div/div/div[2]/div/div/div/div/div[4]/button/span")));
 
-        //driver.findElement(By.xpath("/html/body/div[1]/div/div/div/div/div/main/div/div/div[1]/div/div/div[2]/div/div/div/div/div[4]/button/span")).click();
+// ✅ Now safely interact with elements on the new page
+        Thread.sleep(4000);
+        driver.findElement(By.xpath("/html/body/div[1]/div/div/div/div/div/main/div/div/div[1]/div/div/div[2]/div/div/div/div/div[4]/button/span")).click();
 
         System.out.println("Request submitted successfully.");
     }
