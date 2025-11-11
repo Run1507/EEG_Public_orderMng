@@ -29,7 +29,7 @@ public class Main {
         ChromeOptions chrome = new ChromeOptions();
         chrome.addArguments("--start-maximized", "--remote-allow-origins=*", "--incognito");
         WebDriver driver = new ChromeDriver(chrome);
-        driver.manage().timeouts().implicitlyWait(15,TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
 
         // Open EEG DataHub form : Nanobot-Billing
         driver.get("https://staging.eegdatahub.com/patient-form/e5f5a5e5-2ccf-4973-a47b-615609741170");
@@ -40,8 +40,8 @@ public class Main {
        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("first_Name")));
 
-        driver.findElement(By.id("first_Name")).sendKeys("Math");
-        driver.findElement(By.id("last_Name")).sendKeys("Hampston");
+        driver.findElement(By.id("first_Name")).sendKeys("Amir");
+        driver.findElement(By.id("last_Name")).sendKeys("Masaad");
 
         WebElement date = driver.findElement(By.xpath("//input[@placeholder='Select date']"));
         date.click();

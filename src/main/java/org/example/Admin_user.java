@@ -13,7 +13,7 @@ import java.awt.*;
 import java.awt.datatransfer.StringSelection;
 import java.awt.event.KeyEvent;
 import java.time.Duration;
-import java.util.concurrent.TimeUnit;
+
 
 public class Admin_user {
     public static void main(String[] args) throws InterruptedException, AWTException {
@@ -26,22 +26,22 @@ public class Admin_user {
 
 
         driver.get("https://staging.eegdatahub.com/");
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
 
         driver.findElement(By.id("username")).sendKeys("QaUser");
         driver.findElement(By.id("password")).sendKeys("Welcome@25");
         driver.findElement(By.xpath("//button[@type='submit']")).click();
 
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
 
         driver.findElement(By.xpath("(//*[text()='New Request'])[1]")).click();
         //Thread.sleep(3000);
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         driver.findElement(By.xpath("//span[text()='Add']")).click();
 
         //Profile
-        driver.findElement(By.id("firstName")).sendKeys("kieng");
-        driver.findElement(By.id("lastName")).sendKeys("chi");
+        driver.findElement(By.id("firstName")).sendKeys("Steve");
+        driver.findElement(By.id("lastName")).sendKeys("Smith");
         Thread.sleep(1000);
 
         driver.findElement(By.xpath("//input[@id='gender']")).click();
@@ -80,14 +80,14 @@ public class Admin_user {
         robot5.keyPress(KeyEvent.VK_ENTER);
         robot5.keyRelease(KeyEvent.VK_ENTER);
 
-        driver.findElement(By.id("diagnosis")).sendKeys("ADHD");
+        driver.findElement(By.id("diagnosis")).sendKeys("ADHD"+ Keys.ENTER);
         driver.findElement(By.id("symptoms")).sendKeys("Confusion");
 
         driver.findElement(By.id("medicationResponse")).sendKeys("Yes");
 
-        driver.findElement(By.xpath("//input[@type='radio' and @value='False']")).click();
+        driver.findElement(By.xpath("//input[@name=':r21:' and @value='False']")).click();
 
-        driver.findElement(By.xpath("/html/body/div[1]/div/div/div/div/div/main/div/div/div[1]/div/div/div[2]/form/div[7]/div[3]/div[1]/div/div[2]/div/div/div/label[2]/span[1]")).click();
+        driver.findElement(By.xpath("//input[@name=':r22:' and @value='True']")).click();
         driver.findElement(By.id("briefHistory")).sendKeys("Automation testing : Admin side created request");
 
 //        Thread.sleep(1000);
@@ -101,7 +101,8 @@ public class Admin_user {
         }
 
 
-//        Thread.sleep(1000);
+//       Thread.sleep(1000);
+
 //        JavascriptExecutor j = (JavascriptExecutor) driver;
 //        j.executeScript("window.scrollBy(0,500)");
 //        Thread.sleep(1000);
@@ -123,7 +124,7 @@ public class Admin_user {
         Thread.sleep(3000);
         Robot robot = new Robot();
 
-// First File Upload - ECcondition.edf
+// First File Upload - EC condition.edf
         driver.findElement(By.xpath("/html/body/div[1]/div/div/div/div/div/main/div/div/div[1]/div/div/div[2]/form/div[11]/div[1]/div/div[2]/div/div/span/div[1]/span/div/p[3]")).click();
         Thread.sleep(1000);
         StringSelection file1 = new StringSelection("D:\\Work\\Automation\\quick_file_EC.edf");
@@ -164,12 +165,12 @@ public class Admin_user {
 
 
 
-        WebDriverWait wait4 = new WebDriverWait(driver, Duration.ofSeconds(15));
-        wait4.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//button[contains(@type, 'button')] //span [text()='Submit']")));
+        WebDriverWait wait4 = new WebDriverWait(driver, Duration.ofSeconds(5));
+        wait4.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//button[@type='button']//span[text()='Submit']")));
 
 // ✅ Now safely interact with elements on the new page
-        Thread.sleep(4000);
-        driver.findElement(By.xpath("//button[contains(@type, 'button')] //span [text()='Submit']")).click();
+        Thread.sleep(2000);
+        driver.findElement(By.xpath("//button[@type='button']//span[text()='Submit']")).click();
 
 
 
