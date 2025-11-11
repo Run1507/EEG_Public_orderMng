@@ -50,8 +50,8 @@ public class Account_user {
         //driver.findElement(By.id("firstName")).sendKeys(firstName);
         //driver.findElement(By.id("lastName")).sendKeys(lastName);
 
-        driver.findElement(By.id("firstName")).sendKeys("Farbie");
-        driver.findElement(By.id("lastName")).sendKeys("Nick");
+        driver.findElement(By.id("firstName")).sendKeys("Malan");
+        driver.findElement(By.id("lastName")).sendKeys("David");
 
 
         driver.findElement(By.xpath("//input[@id='gender']")).click();
@@ -171,13 +171,12 @@ public class Account_user {
         driver.findElement(By.xpath("//button[@type='submit']")).click();
         System.out.println("Confirmation page loading.......");
 
-        WebDriverWait wait4 = new WebDriverWait(driver, Duration.ofSeconds(15));
-        wait4.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/html/body/div[1]/div/div/div/div/div/main/div/div/div[1]/div/div/div[2]/div/div/div/div/div[4]/button/span")));
+        WebDriverWait wait4 = new WebDriverWait(driver, Duration.ofSeconds(5));
+        wait4.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//button[@type='button']//span[text()='Submit']")));
 
 // ✅ Now safely interact with elements on the new page
-        Thread.sleep(4000);
-        driver.findElement(By.xpath("/html/body/div[1]/div/div/div/div/div/main/div/div/div[1]/div/div/div[2]/div/div/div/div/div[4]/button/span")).click();
-
+        Thread.sleep(2000);
+        driver.findElement(By.xpath("//button[@type='button']//span[text()='Submit']")).click();
         System.out.println("Request submitted successfully.");
     }
 }
