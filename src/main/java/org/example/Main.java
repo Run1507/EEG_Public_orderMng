@@ -23,6 +23,7 @@ import java.time.Duration;
 import java.util.concurrent.TimeUnit;
 
 public class Main {
+
     public static void main(String[] args) throws InterruptedException, AWTException, IOException, TesseractException {
         // Setup WebDriver
         WebDriverManager.chromedriver().setup();
@@ -32,16 +33,16 @@ public class Main {
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
 
         // Open EEG DataHub form : Nanobot-Billing
-        driver.get("https://staging.eegdatahub.com/patient-form/e5f5a5e5-2ccf-4973-a47b-615609741170");
+        //driver.get("https://staging.eegdatahub.com/patient-form/e5f5a5e5-2ccf-4973-a47b-615609741170");
         //None billing acc : Kothai
-        //driver.get("https://staging.eegdatahub.com/patient-form/0910739e-b8ad-4d44-a7be-12f7607f2bed");
+        driver.get("https://staging.eegdatahub.com/patient-form/0910739e-b8ad-4d44-a7be-12f7607f2bed");
 
         // Fill out the form
        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("first_Name")));
 
-        driver.findElement(By.id("first_Name")).sendKeys("Amir");
-        driver.findElement(By.id("last_Name")).sendKeys("Masaad");
+        driver.findElement(By.id("first_Name")).sendKeys("Riza");
+        driver.findElement(By.id("last_Name")).sendKeys("Rizwan");
 
         WebElement date = driver.findElement(By.xpath("//input[@placeholder='Select date']"));
         date.click();
@@ -168,6 +169,7 @@ public class Main {
         } catch (Exception e) {
             System.out.println("❌ Error while scrolling or clicking 'I Agree': " + e.getMessage());
         }
+        CapID(driver);
 
 
     }
@@ -181,6 +183,7 @@ public class Main {
             instance.setTessVariable("user_defined_dpi", "300"); // Fix "Invalid resolution 0 dpi" warning
 
             instance.setTessVariable("tessedit_char_whitelist", "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789");
+           
 
             return instance.doOCR(new File(imagePath)).trim();
         } catch (TesseractException e) {
@@ -188,4 +191,12 @@ public class Main {
             return "";
         }
     }
+//    i want add another methods for window handle , first run the pervious code after run newly adding code
+//
+//    }
+public static void CapID(WebDriver driver){// this method is not working
+    System.out.println(driver.findElement(By.xpath("//span[@class='sub-title-req ps-2 text-primary fw-bold']")).getText());
+
+}
+
 }

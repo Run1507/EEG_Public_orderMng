@@ -1,4 +1,7 @@
 import io.github.bonigarcia.wdm.WebDriverManager;
+import net.sourceforge.tess4j.ITesseract;
+import net.sourceforge.tess4j.Tesseract;
+import net.sourceforge.tess4j.TesseractException;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -6,14 +9,18 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import javax.imageio.ImageIO;
 import java.awt.*;
-import java.awt.datatransfer.StringSelection;
 import java.awt.event.KeyEvent;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.time.Duration;
 import java.util.concurrent.TimeUnit;
 
 public class New_service_request {
-    public static void main(String[] args) throws InterruptedException, AWTException {
+
+    public static void main(String[] args) throws InterruptedException, AWTException, IOException, TesseractException {
         WebDriverManager.chromedriver().setup();
         ChromeOptions chrome = new ChromeOptions();
         chrome.addArguments("--start-maximized");
@@ -22,202 +29,180 @@ public class New_service_request {
 
         WebDriver driver = new ChromeDriver(chrome);
 
-        driver.get("https://staging.eegdatahub.com/");
+
+
+
+        //driver.get("https://staging.eegdatahub.com/");
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 
-        driver.findElement(By.id("username")).sendKeys("deviga.v@kosoft.co");
-        driver.findElement(By.id("password")).sendKeys("Arun@1507");
-        driver.findElement(By.xpath("//button[@type='submit']")).click();
+        // Open EEG DataHub form : Nanobot-Billing
+        driver.get("https://staging.eegdatahub.com/patient-form/e5f5a5e5-2ccf-4973-a47b-615609741170");
+        //None billing acc : Kothai
+        //driver.get("https://staging.eegdatahub.com/patient-form/0910739e-b8ad-4d44-a7be-12f7607f2bed");
 
-        driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-        driver.findElement(By.xpath("//span[text()='Order Management']")).click();
-        //driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-        Thread.sleep(3000);
+        // Fill out the form
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("first_Name")));
 
-//Public form toggle off
-       // driver.findElement(By.xpath("//div[contains(@class,'row right-side ps-0 mx-0')]//div[1]//button[1]")).click();
-        driver.findElement(By.xpath("/html/body/div[1]/div/div/div/div/div/main/div/div/div[1]/div/button[2]/span")).click();
-        //driver.findElement(By.xpath("/html/body/div[1]/div/div/div/div/div/main/div/div/div[1]/div/button[2]")).click();
-
-        driver.findElement(By.id("firstName")).sendKeys("Peter");
-        driver.findElement(By.id("lastName")).sendKeys("Ben");
-
-        // driver.findElement(By.id("gender")).sendKeys("Male");
-        driver.findElement(By.xpath("//input[@id='gender']")).click();
-        driver.findElement(By.xpath("//div[@title='Male']")).click();
-        Thread.sleep(3000);
-
-        driver.findElement(By.xpath("//input[@id='genderIdentity']")).click();
-       driver.findElement(By.xpath("/html/body/div[4]/div/div/div[2]/div/div/div/div[1]")).click();
-
-        
-        driver.manage().timeouts().implicitlyWait(40, TimeUnit.SECONDS);
+        driver.findElement(By.id("first_Name")).sendKeys("Amir");
+        driver.findElement(By.id("last_Name")).sendKeys("Masaad");
 
         WebElement date = driver.findElement(By.xpath("//input[@placeholder='Select date']"));
         date.click();
-        date.sendKeys("05-16-2000" + Keys.ENTER);
+        date.sendKeys("07-22-2000" + Keys.ENTER);
 
-        driver.findElement(By.id("contactPhone")).sendKeys("9597224187");
+        driver.findElement(By.xpath("//input[@id='birth']")).click();
+        driver.findElement(By.xpath("//div[@title='Male']")).click();
 
-        driver.findElement(By.id("email")).sendKeys("subash1@gmail.com");
+        WebElement dropdown = driver.findElement(By.xpath("//input[@id='birthIdentity']"));
+        dropdown.click();
+        Thread.sleep(2000);
 
-        driver.findElement(By.xpath("//input[@id='handedness']")).click();
-        driver.findElement(By.xpath("//*[text()='Right Hand']")).click();
-
-        WebElement too =driver.findElement(By.id("state"));
-        too.sendKeys("Washington"+ Keys.ENTER);
-
-        Thread.sleep(1000);
-
-        // Session quessionnarie
-
-        driver.findElement(By.id("clinician")).sendKeys("Sara");
-
-
-        driver.findElement(By.xpath("//input[@id='amplifierUsed']")).click();
-
+        // Select from dropdown using Robot class
         Robot robot1 = new Robot();
-        robot1.keyPress(KeyEvent.VK_DOWN);  // Press Down Arrow (Adjust if necessary)
+        robot1.keyPress(KeyEvent.VK_DOWN);
         robot1.keyRelease(KeyEvent.VK_DOWN);
         Thread.sleep(500);
         robot1.keyPress(KeyEvent.VK_ENTER);
         robot1.keyRelease(KeyEvent.VK_ENTER);
 
-        driver.findElement(By.id("diagnosis")).sendKeys("hyper");
+        driver.findElement(By.id("email")).sendKeys("arunpandian.a@kosoft.co");
+        driver.findElement(By.xpath("//input[@id='contactphone']")).sendKeys("9597224187");
 
-        driver.findElement(By.id("symptoms")).sendKeys("Fainting");
-        driver.findElement(By.id("medicationResponse")).sendKeys("Yes");
+        driver.findElement(By.xpath("//input[@id='handedness']")).click();
+        driver.findElement(By.xpath("//*[text()='Right Hand']")).click();
 
-            //Meds taken (True = Yes , False = No) change the value text
-        driver.findElement(By.xpath("//input[@type='radio' and @value='False']")).click();
-        //Thread.sleep(1000);
-
-        driver.findElement(By.xpath("/html/body/div[1]/div/div/div/div/div/main/div/div/div[1]/div/div/div[2]/form/div[7]/div[3]/div[1]/div/div[2]/div/div/div/label[2]/span[1]")).click();
-
-        driver.findElement(By.id("briefHistory")).sendKeys("Automation testing");
-
+        // Scroll down
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("window.scrollBy(0,500)");
         Thread.sleep(1000);
 
-        JavascriptExecutor req = (JavascriptExecutor) driver;
-        req.executeScript("window.scrollBy(0,500)");
+        // Checkboxes
+        driver.findElement(By.xpath("/html/body/div[1]/div/div/div/div[2]/form/div[1]/div[4]/table/tbody/tr[1]/td[2]/label/span/input")).click();
+        driver.findElement(By.xpath("/html/body/div[1]/div/div/div/div[2]/form/div[1]/div[4]/table/tbody/tr[2]/td[2]/label/span/input")).click();
+        driver.findElement(By.xpath("/html/body/div[1]/div/div/div/div[2]/form/div[1]/div[4]/table/tbody/tr[3]/td[2]/label/span/input")).click();
+        driver.findElement(By.xpath("/html/body/div[1]/div/div/div/div[2]/form/div[1]/div[4]/table/tbody/tr[4]/td[2]/label/span/input")).click();
 
         Thread.sleep(1000);
+        JavascriptExecutor k = (JavascriptExecutor)driver;
+        k.executeScript("window.scrollBy(0,500)");
+        Thread.sleep(1000);
 
-        driver.findElement(By.xpath("/html/body/div[1]/div/div/div/div/div/main/div/div/div[1]/div/div/div[2]/form/div[9]/div[2]/table/tbody/tr[1]/td[3]/label")).click();
-        driver.findElement(By.xpath("/html/body/div[1]/div/div/div/div/div/main/div/div/div[1]/div/div/div[2]/form/div[9]/div[2]/table/tbody/tr[2]/td[3]/label")).click();
+        driver.findElement(By.xpath("/html/body/div[1]/div/div/div/div[2]/form/div[1]/div[4]/table/tbody/tr[5]/td[2]/label/span/input")).click();
+        driver.findElement(By.xpath("/html/body/div[1]/div/div/div/div[2]/form/div[1]/div[4]/table/tbody/tr[6]/td[2]/label/span/input")).click();
+        driver.findElement(By.xpath("/html/body/div[1]/div/div/div/div[2]/form/div[1]/div[4]/table/tbody/tr[7]/td[2]/label/span/input")).click();
+        driver.findElement(By.xpath("/html/body/div[1]/div/div/div/div[2]/form/div[1]/div[4]/table/tbody/tr[8]/td[2]/label/span/input")).click();
+        // first the click the dropdown
+        WebElement drop=driver.findElement(By.xpath("//*[@id=\"root\"]/div/div/div/div[2]/form/div[1]/div[6]/div/div[2]/div[1]/div"));
+        drop.click();
+        //second one is search dropdown related xpath and search the data to send the data
+        driver.findElement(By.xpath("(//input[@type='search'])[6]")).sendKeys("JANUMET (Oral Pill)");
 
-        driver.findElement(By.xpath("/html/body/div[1]/div/div/div/div/div/main/div/div/div[1]/div/div/div[2]/form/div[9]/div[2]/table/tbody/tr[3]/td[3]/label")).click();
+        Thread.sleep(4000);
 
-        driver.findElement(By.xpath("/html/body/div[1]/div/div/div/div/div/main/div/div/div[1]/div/div/div[2]/form/div[9]/div[2]/table/tbody/tr[4]/td[3]/label/span")).click();
-
-        driver.findElement(By.xpath("/html/body/div[1]/div/div/div/div/div/main/div/div/div[1]/div/div/div[2]/form/div[9]/div[2]/table/tbody/tr[5]/td[3]/label")).click();
-
-        driver.findElement(By.xpath("/html/body/div[1]/div/div/div/div/div/main/div/div/div[1]/div/div/div[2]/form/div[9]/div[2]/table/tbody/tr[6]/td[3]/label")).click();
-
-        driver.findElement(By.xpath("/html/body/div[1]/div/div/div/div/div/main/div/div/div[1]/div/div/div[2]/form/div[9]/div[2]/table/tbody/tr[7]/td[3]/label")).click();
-
-        driver.findElement(By.xpath("/html/body/div[1]/div/div/div/div/div/main/div/div/div[1]/div/div/div[2]/form/div[9]/div[2]/table/tbody/tr[8]/td[3]/label")).click();
-
-
-
-        //Medication code (its like search dropdown )
-        //click the dropdown
-       driver.findElement(By.xpath("//body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/main[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/form[1]/div[9]/div[4]/div[1]/div[2]/div[1]/div[1]/div[1]")).click();
-       Thread.sleep(3000);
-       //search medicine and enter
-       driver.findElement(By.cssSelector("#rc_select_9")).sendKeys("JANUMET (Oral Pill)");
+        // last step enter option
+        Actions action=new Actions(driver);
+        action.sendKeys(Keys.ENTER).perform();
         Thread.sleep(3000);
 
+        //Dosage Medication dropdown
+        driver.findElement(By.xpath("//body[1]/div[1]/div[1]/div[1]/div[1]/div[2]/form[1]/div[1]/div[6]/div[1]/div[2]/div[2]/div[1]")).click();
+        Actions action1=new Actions(driver);
+        action1.sendKeys(Keys.ENTER).perform();
+        Thread.sleep(3000);
 
-        //driver.findElement(By.xpath("((//input[@id='rc_select_9'])[1]")).sendKeys("JANUMET (Oral Pill)");
-       Actions action = new Actions(driver);
-  action.sendKeys(Keys.ENTER).perform();
-  Thread.sleep(2000);
+        js.executeScript("window.scrollBy(0,500)");
+        Thread.sleep(3000);
 
-// its dosage dropdown
-  driver.findElement(By.xpath("//body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/main[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/form[1]/div[9]/div[4]/div[1]/div[2]/div[1]/div[2]/div[1]")).click();
-action.sendKeys(Keys.ENTER).perform();
-Thread.sleep(3000);
+        // ✅ CAPTCHA Processing
+        System.out.println("🔄 Capturing CAPTCHA...");
+        WebElement captchaElement = driver.findElement(By.id("canv"));
+        js.executeScript("arguments[0].scrollIntoView(true);", captchaElement);
+        Thread.sleep(2000);
 
+        // Take a screenshot of the CAPTCHA element directly
+        File captchaScreenshot = captchaElement.getScreenshotAs(OutputType.FILE);
+        BufferedImage captchaImage = ImageIO.read(captchaScreenshot);
 
-        
+        // Save the CAPTCHA image
+        File captchaFile = new File("captcha.png");
+        ImageIO.write(captchaImage, "png", captchaFile);
+        System.out.println("✅ CAPTCHA image saved successfully!");
 
-        // Reuse the Robot instance
-        Robot robot = new Robot();
+        // Extract text from CAPTCHA using OCR
+        String captchaText = solveCaptchaWithOCR("captcha.png");
+        System.out.println("Extracted CAPTCHA: " + captchaText);
 
-// First File Upload - ECcondition.edf
-        driver.findElement(By.xpath("/html/body/div[1]/div/div/div/div/div/main/div/div/div[1]/div/div/div[2]/form/div[11]/div[1]/div/div[2]/div/div/span/div[1]/span/div/p[3]")).click();
-        Thread.sleep(1000);
+        WebElement Reuse = driver.findElement(By.xpath("/html/body/div[1]/div/div/div/div[2]/form/div[2]/div[2]/div/input")); // Use your actual CAPTCHA input ID
+        Reuse.click();
+        Thread.sleep(3000); // wait after clicking
 
-        StringSelection file1 = new StringSelection("D:\\work\\Automation Testing\\EDF file\\ECcondition.edf");
-        Toolkit.getDefaultToolkit().getSystemClipboard().setContents(file1, null);
-        Thread.sleep(500);
+        // ✅ Step 4: Paste the extracted CAPTCHA text
+        Reuse.sendKeys(captchaText);
+        Thread.sleep(3000); // wait after filling
 
-        robot.keyPress(KeyEvent.VK_CONTROL);
-        robot.keyPress(KeyEvent.VK_V);
-        robot.keyRelease(KeyEvent.VK_V);
-        robot.keyRelease(KeyEvent.VK_CONTROL);
-        Thread.sleep(500);
+        System.out.println("✅ CAPTCHA text pasted into input field.");
 
-        robot.keyPress(KeyEvent.VK_ENTER);
-        robot.keyRelease(KeyEvent.VK_ENTER);
-        Thread.sleep(2000); // Wait for upload to finish
-
-// Second File Upload - conditionEO.edf
-        driver.findElement(By.xpath("/html/body/div[1]/div/div/div/div/div/main/div/div/div[1]/div/div/div[2]/form/div[11]/div[2]/div/div[2]/div/div/span/div[1]")).click();
-        Thread.sleep(1000);
-
-        StringSelection file2 = new StringSelection("D:\\work\\Automation\\conditionEO.edf");
-        Toolkit.getDefaultToolkit().getSystemClipboard().setContents(file2, null);
-        Thread.sleep(500);
-
-        robot.keyPress(KeyEvent.VK_CONTROL);
-        robot.keyPress(KeyEvent.VK_V);
-        robot.keyRelease(KeyEvent.VK_V);
-        robot.keyRelease(KeyEvent.VK_CONTROL);
-        Thread.sleep(500);
-
-        robot.keyPress(KeyEvent.VK_ENTER);
-        robot.keyRelease(KeyEvent.VK_ENTER);
-        //Thread.sleep(2000); // Wait for upload to finish
-
-        System.out.println("Both EDF files uploaded successfully.");
-
-
-
-
-
-
-
-
-
-
-        //Patient comsent form enabled option
-        driver.findElement(By.xpath("/html/body/div[1]/div/div/div/div/div/main/div/div/div[1]/div/div/div[2]/form/div[13]/label/span[1]/input")).click();
-        System.out.println("Patient consent form sent successfully");
-
-      //driver.findElement(By.xpath("//button[@type='submit']")).click();
         driver.findElement(By.xpath("//button[@type='submit']")).click();
 
-
-        System.out.println("Confirmation page loading.......");
-
-Thread.sleep(3000);
-
-       // driver.findElement(By.xpath("/html/body/div[1]/div/div/div/div/div/main/div/div/div[1]/div/div/div[2]/div/div/div/div/div[4]/button")).click();
-        driver.findElement(By.xpath("//button[@type='button' and span[text()='Submit']]")).click();
-
-        System.out.println("Request submit successfully");
+        //Submit button after need scroll to click 'agree'
 
 
+        System.out.println("✅ Submit button clicked.");
 
+        // ✅ Scroll to click "I Agree"
+        try {
+            WebElement scrollableDiv = driver.findElement(By.cssSelector("h6.termcontent.scrollable-term-container"));
+            JavascriptExecutor js2 = (JavascriptExecutor) driver;
 
-//Thread.sleep(2000);
+            long lastHeight = ((Number) js2.executeScript("return arguments[0].scrollHeight;", scrollableDiv)).longValue();
+            long clientHeight = ((Number) js2.executeScript("return arguments[0].clientHeight;", scrollableDiv)).longValue();
+            long currentHeight = 0;
 
-        //driver.quit();
+            while (currentHeight + clientHeight < lastHeight) {
+                js2.executeScript("arguments[0].scrollTop += 90;", scrollableDiv);
+                Thread.sleep(100);
+                currentHeight = ((Number) js2.executeScript("return arguments[0].scrollTop;", scrollableDiv)).longValue();
+            }
 
+            Thread.sleep(2000);
+            WebElement agreeButton = driver.findElement(By.xpath("//*[text()='I Agree']"));
+            agreeButton.click();
+            System.out.println("✅ 'I Agree' button clicked.");
+        } catch (Exception e) {
+            System.out.println("❌ Error while scrolling or clicking 'I Agree': " + e.getMessage());
+        }
 
-//driver.close();
 
     }
+
+    // 🔹 OCR Function to Solve CAPTCHA
+    public static String solveCaptchaWithOCR(String imagePath) {
+        try {
+            ITesseract instance = new Tesseract();
+            instance.setDatapath("D:\\Automatio Testing\\Tesseract-OCR\\tessdata"); // Set the correct Tesseract path
+            instance.setLanguage("eng"); // Ensure English is used
+            instance.setTessVariable("user_defined_dpi", "300"); // Fix "Invalid resolution 0 dpi" warning
+
+            instance.setTessVariable("tessedit_char_whitelist", "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789");
+
+
+            return instance.doOCR(new File(imagePath)).trim();
+        } catch (TesseractException e) {
+            System.out.println("❌ Error solving CAPTCHA: " + e.getMessage());
+            return "";
+        }
+
+
+    }
+public static void CapID(WebDriver driver){
+        //driver.
 }
+
+
+
+    }
+
+
+
+

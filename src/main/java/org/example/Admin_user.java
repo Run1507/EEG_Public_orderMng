@@ -81,6 +81,7 @@ public class Admin_user {
         robot5.keyRelease(KeyEvent.VK_ENTER);
 
         driver.findElement(By.id("diagnosis")).sendKeys("ADHD"+ Keys.ENTER);
+
         driver.findElement(By.id("symptoms")).sendKeys("Confusion");
 
         driver.findElement(By.id("medicationResponse")).sendKeys("Yes");
